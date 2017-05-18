@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>Accessible Tabs and Accordions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="tab-accordion.css" type="text/css" />
+</head>
+
+<body>
+
+		<h1>Accessible Tabs and Accordions</h1>
+		
+		<p>Both tabs and accordions show and hide content after user initiation. When stripped down to their most basic form, each toggle element can be semantically represented as a heading followed by content relating to that heading. For this reason, the markup must begin in this way for progressive enhancement. Doing this allows the content to make the most sense when no JavaScript is available, when viewed in text only browsers (like <a href="http://www.webbie.org.uk/">WebbIE</a>), and when displaying all content expanded in the print stylesheet. It also lends itself to displaying expanded for large screen displays and compacting to an accordion layout for smaller screens only which can be a better user experience for some content.</p>
+		
+		<p>With progressive enhancement, JavaScript is added to condense the content into its tab or accordion container. To be accessible, the accordion triggers and tabs must be keyboard friendly. It is also important to use ARIA to give screen readers more information about what content is being displayed.</p>
+				
+		<h2>Accordion anytime, anywhere</h2>
+		<p>This is your classic accordion that always acts like an accordion no matter what size screen resolution.</p>
+		
+		<div class="accordion always">
+			<h3 class="toggle">First Heading</h3>
+			<div class="content">
+				<p>Content for the first accordion. This can include multiple paragraphs, nested headings, lists, images, tables, a map, a form, or even additional nested tabs and accordions.</p>
+				<h4>Regular Heading</h4>
+				<p><a href="/">Just a regular link</a>.</p>
+			</div>
+			
+			<h3 class="toggle">Second Heading</h3>
+			<div class="content">
+				<p>Content for the second accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+				<div class="accordion tabs">
+					<h4 class="toggle">First Tab</h4>
+					<div class="content">
+						<p>Content for the first tab. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Second Tab</h4>
+					<div class="content">
+						<p>Content for the second tab. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Third Tab</h4>
+					<div class="content">
+						<p>Content for the third tab contains an additional nested accordion. Content can be easier to scan and read when its all expanded on large screens by default, without the extra work of opening each individual accordion.</p>
+						
+						<div class="accordion always multi">
+							<h5 class="toggle">Closed Accordion</h5>
+							<div class="content">
+								<p>Content for closed by default accordion.</p>
+							</div>
+							
+							<h5 class="toggle open">Open Accordion</h5>
+							<div class="content">
+								<p>Content for open by default accordion.</p>
+							</div>
+							
+							<h5 class="toggle open">Open Accordion 2</h5>
+							<div class="content">
+								<p>Content for open by default accordion 2.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<h3 class="toggle">Third Heading</h3>
+			<div class="content">
+				<p>Content for the third accordion contains an additional nested accordion set to display as an accordion for small screens only. Content can be easier to scan and read when its all expanded on large screens by default, without the extra work of opening each individual accordion.</p>
+				
+				<div class="accordion small-only">
+					<h4 class="toggle">Nested Accordion</h4>
+					<div class="content">
+						<p>Content for the first nested accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 2</h4>
+					<div class="content">
+						<p>Content for the second nested accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 3</h4>
+					<div class="content">
+						<p>Content for the third accordion.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h2>Accordion multi select</h2>
+		<p>This accordion can have more than one open at a time.</p>
+		
+		<div class="accordion always multi">
+			<h3 class="toggle">First Heading</h3>
+			<div class="content">
+				<p>Content for the first accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Second Heading</h3>
+			<div class="content">
+				<p>Content for the second accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Third Heading</h3>
+			<div class="content">
+				<p>Content for the third accordion.
+				</p>
+			</div>
+		</div>
+		
+		<h2>Accordion default open option</h2>
+		<p>The accordions can be open by default with the class of "open" added to the toggle.</p>
+		
+		<div class="accordion always multi">
+			<h3 class="toggle open">First Heading - Default Open</h3>
+			<div class="content">
+				<p>Content for the first accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle open">Second Heading - Default Open</h3>
+			<div class="content">
+				<p>Content for the second accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Third Heading - Default Closed</h3>
+			<div class="content">
+				<p>Content for the third accordion.
+				</p>
+			</div>
+		</div>
+		
+				
+		<h2>Accordion to plain text</h2>
+		<p>Taking a mobile-first approach, this content acts like an accordion on small screens and expands out to show the full content on large screens. This method makes for a good user experience by providing an easy to scan mobile layout while not making content hidden behind extra clicks on large screens.</p>
+		
+		<div class="accordion small-only">
+			<h3 class="toggle">First Heading</h3>
+			<div class="content">
+				<p>Content for the first accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Second Heading</h3>
+			<div class="content">
+				<p>Content for the second accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+				<div class="accordion tabs">
+					<h4 class="toggle">First Tab</h4>
+					<div class="content">
+						<p>Content for the first tab. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+						<p>Class names to add to the accordion div for different styles:</p>
+						<ul>
+							<li>always or small-only</li>
+							<li>tabs</li>
+							<li>multi</li>
+							<li>open</li>
+						</ul>
+					</div>
+					
+					<h4 class="toggle">Second Tab</h4>
+					<div class="content">
+						<p>Content for the second tab. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+						<table>
+							<caption>Test Data Table</caption>
+							<thead>
+								<tr>
+									<th>Table Heading 1</th>
+									<th>Table Heading 2</th>
+									<th>Table Heading 3</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Table data</td>
+									<td>Table data</td>
+									<td>Table data</td>
+								</tr>
+								<tr>
+									<td>Table data</td>
+									<td>Table data</td>
+									<td>Table data</td>
+								</tr>
+								<tr>
+									<td>Table data</td>
+									<td>Table data</td>
+									<td>Table data</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<h4 class="toggle">Third Tab</h4>
+					<div class="content">
+						<p>Content for the third tab contains an additional nested accordion. Content can be easier to scan and read when its all expanded on large screens by default, without the extra work of opening each individual accordion.</p>
+						
+						<div class="accordion always multi">
+							<h5 class="toggle">Multi Nested Accordion</h5>
+							<div class="content">
+								<p>Content for the first nested accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+							</div>
+							
+							<h5 class="toggle">Multi Nested Accordion 2</h5>
+							<div class="content">
+								<p>Content for the second nested accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+							</div>
+							
+							<h5 class="toggle">Multi Nested Accordion 3</h5>
+							<div class="content">
+								<p>Content for the third accordion contains an additional nested accordion.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<h3 class="toggle">Third Heading</h3>
+			<div class="content">
+				<p>Content for the third accordion contains an additional nested accordion. Content can be easier to scan and read when its all expanded on large screens by default, without the extra work of opening each individual accordion.</p>
+				
+				<div class="accordion always">
+					<h4 class="toggle">Nested Accordion</h4>
+					<div class="content">
+						<p>Content for the first nested accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 2</h4>
+					<div class="content">
+						<p>Content for the second nested accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 3</h4>
+					<div class="content">
+						<p>Content for the third accordion contains an additional nested accordion.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<h2>Accordion to tabs</h2>
+		<p>An easy-to-use accordion for small screens turns into tabs at higher resolutions.</p>
+		
+		<div class="accordion tabs">
+			<h3 class="toggle">First Tab</h3>
+			<div class="content">
+				<p>Content for the first tab. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Second Tab</h3>
+			<div class="content">
+				<p>Content for the second tab. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+			</div>
+			
+			<h3 class="toggle">Third Tab</h3>
+			<div class="content">
+				<p>Content for the third tab contains an additional nested accordion. Content can be easier to scan and read when its all expanded on large screens by default, without the extra work of opening each individual accordion.</p>
+				
+				<div class="accordion small-only">
+					<h4 class="toggle">Nested Accordion</h4>
+					<div class="content">
+						<p>Content for the first nested accordion. This can include multiple paragraphs, nested headings, lists, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 2</h4>
+					<div class="content">
+						<p>Content for the second nested accordion. Again, this content can include multiple paragraphs, nested headings, lists, tables, images and even additional tabs and accordions.</p>
+					</div>
+					
+					<h4 class="toggle">Nested Accordion 3</h4>
+					<div class="content">
+						<p>Content for the third accordion contains an additional nested accordion.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+<script src="tab-accordion.js"></script>
+</body>
+</html>

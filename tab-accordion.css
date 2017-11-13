@@ -1,57 +1,58 @@
 /* Tabs and Accordions */
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0,0,0,0);
-	border: 0;
-}
-
-.accordion {
-	margin-bottom: 1em;
-}
 .accordion.js, .tabs.js {
 	clear: both;
 	width: 100%;
+	margin-bottom: 1em;
 }
-.accordion.js .toggle {
-	display: none;
-	visibility: hidden;
+.accordion:before,
+.accordion:after {
+  content: "";
+  display: table;
+} 
+.accordion:after {
+  clear: both;
 }
-.accordion.multi.js .toggle.sr-only {
-	display: block;
-	visibility: visible;
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0,0,0,0);
-	border: 0;
+.accordion > .listitem {
+	float: left;
+	width: 100%;
+	clear: both;
+	box-sizing: border-box;
 }
-.accordion.js button.toggle, .accordion.js .tablist .toggle {
+.accordion.js > .listitem > .toggle {
+	font-size: 100%;
+}
+.accordion.multi.js > .listitem > .toggle {
+	margin: 0;
+}
+.accordion.js > .toggle button.toggle, .accordion.js .tablist .toggle {
 	display: block;
 	border: 0 none;
-	visibility: visible;
 	text-align: left;
 }
-.accordion.always.js > button.toggle, .tabs.js > button.toggle {
+.accordion.js .toggle .heading {
+	display: none;
+}
+.accordion.always.js > .listitem > .toggle {
+	margin: 0;
+}
+.accordion.always.js > .listitem > .toggle > button.toggle, .accordion.multi.js > .listitem > .toggle > button.toggle, .accordion.tabs.js > .listitem > .toggle > button.toggle {
 	width: 100%;
 	padding: 0.5em 1.75em 0.5em 0.5em;
 	box-sizing: border-box;
 	background: #e1e1e1;
+	font-size: 100%;
 	color: #222;
-	font-size: 110%;
-	margin: 0 0 1px;
+	margin: 0;
 	cursor: pointer;
 	transition: background .25s ease-in-out, color .25s ease-in-out;
 	position: relative;
+	text-align: left;
+	border: 0 none;
 }
-.accordion.always.js > button.toggle::before, .tabs.js > button.toggle::before {
+.accordion.multi.js > .listitem > .toggle > button.toggle {
+	font-size: 100%;
+}
+.accordion.always.js > .listitem > .toggle > button.toggle::before, .accordion.multi.js > .listitem > .toggle > button.toggle::before, .accordion.tabs.js > .listitem > .toggle > button.toggle::before {
 	content: "";
 	position: absolute;
 	right: .5em;
@@ -61,7 +62,7 @@
 	background: #222;
 	transition: background .25s ease-in-out, color .25s ease-in-out/*, transform .25s ease-in-out*/;
 }
-.accordion.always.js > button.toggle::after, .tabs.js > button.toggle::after {
+.accordion.always.js > .listitem > .toggle > button.toggle::after, .accordion.multi.js > .listitem > .toggle > button.toggle::after, .accordion.tabs.js > .listitem > .toggle > button.toggle::after {
 	content: "";
 	position: absolute;
 	right: .5em;
@@ -72,81 +73,68 @@
 	transition: background .25s ease-in-out, color .25s ease-in-out/*, transform .25s ease-in-out*/;
 	transform: rotate(90deg);
 }
-.accordion.always.js button.toggle[aria-selected=true]::after, .tabs.js button.toggle[aria-selected=true]::after {
+/*
+.accordion.js > .listitem > .toggle > button.toggle[aria-expanded=false] {
+	margin-bottom: 1px;
+}
+*/
+.accordion.always.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after, .accordion.tabs.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after {
 	transform: rotate(180deg);
 }
-.accordion.always.js > button.toggle:hover, .tabs.js > button.toggle:hover,
-.accordion.always.js > button.toggle:focus, .tabs.js > button.toggle:focus {
+.accordion.always.js > .listitem > .toggle > button.toggle:hover, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover,
+.accordion.always.js > .listitem > .toggle > button.toggle:focus, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus,
+.accordion.multi.js > .listitem > .toggle > button.toggle:hover, .accordion.multi.js > .listitem > .toggle > button.toggle:focus {
 	background: #444;
 	color: #fff;
 }
-.accordion.always.js button.toggle:hover::before, .tabs.js button.toggle:hover::before,
-.accordion.always.js button.toggle:focus::before, .tabs.js button.toggle:focus::before,
-.accordion.always.js button.toggle:hover::after, .tabs.js button.toggle:hover::after,
-.accordion.always.js button.toggle:focus::after, .tabs.js button.toggle:focus::after {
+.accordion.always.js > .listitem > .toggle > button.toggle:hover::before, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover::before,
+.accordion.always.js > .listitem > .toggle > button.toggle:focus::before, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus::before,
+.accordion.always.js > .listitem > .toggle > button.toggle:hover::after, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover::after,
+.accordion.always.js > .listitem > .toggle > button.toggle:focus::after, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus::after,
+.accordion.multi.js > .listitem > .toggle > button.toggle:hover::before, .accordion.multi.js > .listitem > .toggle > button.toggle:focus::before,
+.accordion.multi.js > .listitem > .toggle > button.toggle:hover::after, .accordion.multi.js > .listitem > .toggle > button.toggle:focus::after {
 	background: #e1e1e1;
 }
-.accordion.always.js > .content, .tabs.js > .content {
+.accordion.always.js > .listitem > .content, .accordion.tabs.js > .listitem > .content {
 	clear: both;
 	width: 100%;
 	box-sizing: border-box;
-}
-.accordion > .content > * {
-	max-width: 100%;
-}
-.accordion.js > [aria-hidden=true] {
-	display: block;
-	max-height: 0;
-	opacity: 0;
-	visibility: hidden;
+	float: left;
 	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	transition: height 1s ease-in-out, opacity .5s ease-in-out;
-}
-.accordion.js > [aria-hidden=true] > * {
-	opacity: 0;
-}
-/* needed to remove tabbing to hidden elements */
-.accordion.js > [aria-hidden=true] .tabs.js .tablist button.toggle,
-.accordion.js > [aria-hidden=true] button,
-.accordion.js > [aria-hidden=true] input,
-.accordion.js > [aria-hidden=true] textarea,
-.accordion.js > [aria-hidden=true] select,
-.accordion.js > [aria-hidden=true] iframe,
-.accordion.js > [aria-hidden=true] a {
-	display: none;
-}
-.accordion.js > [aria-hidden=false] {
-	display: block;
-	opacity: 1;
-	max-height: 1000em;
-	visibility: visible;
-	margin: -1px 0 0;
 	border: 1px solid #ccc;
-	padding: .5em;
-	transition: max-height 1s ease-in-out, opacity .5s ease-in-out;
 }
-.accordion.js > [aria-hidden=false]  > * {
-	opacity: 1;
+.accordion .content > * {
+	max-width: 100%;
 }
 
 
 /* small-only accordion */
-.accordion.small-only.js > button.toggle {
+.accordion.small-only > .listitem > .toggle > button.toggle, .accordion.small-only.js > .listitem > .toggle > .heading {
+	display: none;
+}
+.accordion.small-only > .listitem > .toggle > .heading {
+	display: block;
+}
+.accordion.small-only.js > .listitem > .toggle, .accordion.tabs.js > .listitem > .toggle {
+	margin: 0;
+}
+.accordion.small-only.js > .listitem > .toggle > button.toggle {
 	width: 100%;
 	padding: .5em;
 	box-sizing: border-box;
 	background: #e1e1e1;
 	color: #222;
 	letter-spacing: -.5px;
-	font-size: 110%;
-	margin: 0 0 1px;
+	font-size: 100%;
+	margin: 0;
 	cursor: pointer;
 	transition: background .25s ease-in-out, color .25s ease-in-out;
 	position: relative;
+	display: block;
+	border: 0 none;
+	text-align: left;
 }
-.accordion.small-only.js > button.toggle::before {
+.accordion.small-only.js > .listitem > .toggle > button.toggle::before {
 	content: "";
 	position: absolute;
 	right: .5em;
@@ -156,7 +144,7 @@
 	background: #222;
 	transition: background .25s ease-in-out, color .25s ease-in-out;
 }
-.accordion.small-only.js button.toggle::after {
+.accordion.small-only.js > .listitem > .toggle > button.toggle::after {
 	content: "";
 	position: absolute;
 	right: .5em;
@@ -167,31 +155,41 @@
 	transition: background .25s ease-in-out, color .25s ease-in-out;
 	transform: rotate(90deg);
 }
-.accordion.small-only.js button.toggle[aria-selected=true]::after {
+.accordion.small-only.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after {
 	display: none;
 }
-.accordion.small-only.js > button.toggle:hover,
-.accordion.small-only.js > button.toggle:focus {
+.accordion.small-only.js > .listitem > .toggle > button.toggle:hover,
+.accordion.small-only.js > .listitem > .toggle > button.toggle:focus {
 	background: #444;
 	color: #fff;
 }
-.accordion.small-only.js button.toggle:hover::before,
-.accordion.small-only.js button.toggle:focus::before,
-.accordion.small-only.js button.toggle:hover::after,
-.accordion.small-only.js button.toggle:focus::after {
+.accordion.small-only.js > .listitem > .toggle > button.toggle:hover::before,
+.accordion.small-only.js > .listitem > .toggle > button.toggle:focus::before,
+.accordion.small-only.js > .listitem > .toggle > button.toggle:hover::after,
+.accordion.small-only.js > .listitem > .toggle > button.toggle:focus::after {
 	background: #e1e1e1;
 }
-.accordion.small-only.js > .content {
+.accordion.small-only.js > .listitem > .content {
 	clear: both;
 	width: 100%;
 	box-sizing: border-box;
+	float: left;
+	margin: 0;
+	border: 1px solid #ccc;
 }
+.accordion.small-only > .listitem > .content > .padding {
+	padding: 0;
+}
+.accordion.js > .listitem > .content > .padding {
+	padding: .5em;
+}
+
 
 
 
 /* large */
-@media only screen and (min-width: 700px) {
-	.tabs.js .tablist {
+@media only screen and (min-width: 1000px) {
+	.tabs.js > .tablist {
 		list-style: none;
 		/*text-align: center;*/
 		margin: 0 0 -1px;
@@ -199,15 +197,15 @@
 		z-index:1;
 		position: relative;
 	}
-	.tabs.js .tablist li {
+	.tabs.js > .tablist > li {
 		display: inline;
 	}
-	.tabs.js .tablist button.toggle {
+	.tabs.js > .tablist > li > button.toggle {
 		/*margin: 0 5px;*/
 		margin: 0 5px 0 0;
 		display: inline-block;
 		letter-spacing: -.5px;
-		font-size: 110%;
+		font-size: 100%;
 		padding: .5em;
 		background: #e1e1e1;
 		color: #222;
@@ -216,17 +214,14 @@
 		transition: background .25s ease-in-out, color .25s ease-in-out;
 		cursor: pointer;
 	}
-	.tabs.js .tablist button.toggle[aria-selected=true] {
+	.tabs.js > .tablist > li > button.toggle[aria-expanded=true] {
 		background: #fff;
 		border-bottom: 1px solid #fff;
 		cursor: text;
 	}
-	.tabs.js > .tablist button.toggle[aria-selected=true]:hover {
+	.tabs.js > .tablist > li > button.toggle[aria-expanded=true]:hover {
 		background: #fff;
 		color: #222;
-	}
-	.tabs.js > button.toggle::before, .tabs.js > button.toggle::after {
-		display: none;
 	}
 	.tabs.js > .tablist button.toggle:hover {
 		background: #444;
@@ -236,16 +231,8 @@
 		background: #fff;
 		color: #222;
 	}
-	.tabs.js > [aria-hidden=false] {
-		transition: none;
-		margin: 0;
-	}
-	.tabs.js > [aria-hidden=false] > * {
-		transition: opacity .5s ease-in-out;
-	}
 	.accordion.small-only > .toggle {
 		display: block;
-		visibility: visible;
 	}
 	.accordion.small-only > button.toggle {
 		display: none;
@@ -253,51 +240,24 @@
 	.accordion.js.small-only > .content {
 		display: block;
 		overflow: hidden;
-		opacity: 1;
-		transition: visibility .5s ease-in-out, max-height .5s ease-in-out, opacity .5s ease-in-out;
-		max-height: 100em;
-		visibility: visible;
 		margin: 0;
 		padding: 0;
 	}
 }
 
 
+/* print */
 @media print {
-	.accordion {
-		margin: 0 !important;
-	}
-	.accordion .content, .accordion .toggle {
+	.accordion > .listitem > .content, .accordion > .listitem > .content > .padding {
 		display: block !important;
-		visibility: visible !important;
-		opacity: 1 !important;
-		max-height: 100000em !important;
 		border: 0 none !important;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
-	.accordion.js [aria-hidden=true] button,
-	.accordion.js [aria-hidden=true] input,
-	.accordion.js [aria-hidden=true] textarea,
-	.accordion.js [aria-hidden=true] select,
-	.accordion.js [aria-hidden=true] iframe,
-	.accordion.js [aria-hidden=true] a {
-		display: inline-block !important;
-	}
-	.accordion > .content > * {
-		opacity: 1 !important;
-	}
-	.accordion .tablist, .accordion button.toggle, .accordion.js button.toggle, .accordion.multi button.toggle {
+	.accordion.tabs > .tablist, .accordion > .listitem > .toggle > button.toggle, .accordion.tabs > .listitem > .toggle > button.toggle {
 		display: none !important;
-		visibility: hidden !important;
 	}
-	.accordion.multi.js .toggle.sr-only {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		padding: inherit !important;
-		margin: inherit !important;
-		clip: none !important;
-		border: inherit !important;
+	.accordion > .listitem > .toggle > .heading, .accordion.tabs > .listitem > .toggle, .accordion.tabs > .listitem > .toggle > .heading {
+		display: block !important;
 	}
 }

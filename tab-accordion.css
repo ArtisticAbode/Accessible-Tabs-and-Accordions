@@ -1,16 +1,819 @@
-/* Tabs and Accordions */
-.accordion.js, .tabs.js {
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans 800';
+  src: url('../fonts/OpenSans/OpenSans-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Andika';
+  src: url('../fonts/Andika/AndBasR-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Andika/AndBasR-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Andika/AndBasR-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../fonts/Andika/AndBasR-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Andika/AndBasR-webfont.svg#svgAndika') format('svg'); /* Legacy iOS */
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+font-family: 'Open Sans', sans-serif;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, main {
+display: block;
+}
+* {
+-moz-osx-font-smoothing: grayscale;
+-webkit-font-smoothing: antialiased;
+}
+body {
+background: #fff;
+line-height: 1.5;
+font-size: 100%;
+color: #202020;
+}
+::-moz-selection { 
+background-color: #767676;
+color: #fff;
+text-shadow: none !important;
+}
+::selection { 
+background-color: #767676;
+color: #fff;
+text-shadow: none !important;
+}
+.sr-only {
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0,0,0,0);
+border: 0;
+color: #000 !important;
+background: #fff !important;
+}
+.sr-only.focus-visible:focus {
+position: absolute;
+top: 1em;
+left: 1em;
+width: auto;
+height: auto;
+padding: 1.25em;
+margin: 0;
+clip: unset;
+border: 1px dotted #2245de;
+z-index: 1000;
+}
+ul {
+margin-left: 5%;
+list-style-type: disc;
+}
+blockquote, q, .signature {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+b, strong {
+font-family: 'Open Sans 800';
+font-weight: 800;
+letter-spacing: -.5px;
+}
+i, em {
+font-style: italic;
+}
+p, ul, ol, table, blockquote, .accordion {
+margin-bottom: 1em;
+}
+main li {
+margin: 0 0 .25em;
+}
+h2, h3, h4, h5, h6 {
+font-family: 'Open Sans', sans-serif;
+margin: 1em 0 .25em;
+color: #444;
+line-height: 1.1;
+letter-spacing: -1px;
+font-weight: 300;
+}
+.night h2, .night h3, .night h4, .night h5, .night h6 {
+color: #fff;
+}
+h1 {
+font-family: 'Open Sans', sans-serif;
+font-size: 240%;
+margin: 0 0 .75em;
+color: #444;
+line-height: 1.1;
+letter-spacing: -1px;
+font-weight: 300;
+}
+.night h1 {
+color: #fff;
+}
+h2 {
+font-size: 230%;
+}
+h3 {
+font-size: 210%;
+}
+h4 {
+font-size: 190%;
+}
+h5 {
+font-size: 170%;
+}
+h6 {
+font-size: 150%;
+font-weight: 600;
+letter-spacing: -.5px;
+}
+a, button.link, button.link:hover, button.link:focus {
+color: #2245de;
+text-shadow: #fff 0.03em 0px, #fff -0.03em 0px, #fff 0px 0.03em, #fff 0px -0.03em, #fff 0.06em 0px, #fff -0.06em 0px, #fff 0.09em 0px, #fff -0.09em 0px, #fff 0.12em 0px, #fff -0.12em 0px, #fff 0.15em 0px, #fff -0.15em 0px;
+background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#4906ae, #4906ae);
+text-decoration: none;
+background-position: 0% 94%, 100% 94%, 0% 94%;
+background-repeat: no-repeat, no-repeat, repeat-x;
+background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+-webkit-transition: color .25s ease-in-out;
+transition: color .25s ease-in-out;
+}
+.night main a, .night main button.link {
+color: #C5CBFF;
+text-shadow: #333 0.03em 0px, #333 -0.03em 0px, #333 0px 0.03em, #333 0px -0.03em, #333 0.06em 0px, #333 -0.06em 0px, #333 0.09em 0px, #333 -0.09em 0px, #333 0.12em 0px, #333 -0.12em 0px, #333 0.15em 0px, #333 -0.15em 0px;
+background-image: linear-gradient(#333, #333), linear-gradient(#333, #333), linear-gradient(#C5CBFF, #C5CBFF);
+}
+a:hover, a:focus, button.link:hover, button.link:focus {
+color: #AB0DE5;
+}
+.night main a:hover, .night main a:focus, .night button.link:hover, .night button.link:focus {
+color: #FFC5EE;
+}
+[data-whatinput="keyboard"] a:focus, [data-whatinput="keyboard"] button.link:focus {
+outline: 3px solid #4906ae;
+outline-offset: 3px;
+background-image: none;
+}
+[data-whatinput="keyboard"] .night main a:focus, [data-whatinput="keyboard"] .night main button.link:focus {
+outline: 3px solid #C5CBFF;
+}
+abbr[title], acronym[title] {
+text-decoration: none;
+border-bottom: 1px dashed;
+cursor: help;
+}
+iframe, img {
+max-width: 100%;
+}
+.width100 {
+width: 100%;
+}
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+}
+.left {
+float: left;
+margin-right: 1em;
+margin-bottom: 1em;
+}
+.right {
+float: right;
+margin-left: 1em;
+margin-bottom: 1em;
+}
+
+table {
+border-left: 1px solid #e1e1e1;
+border-top: 1px solid #e1e1e1;
+width: 100%;
+font-size: 90%;
+}
+caption {
+text-align: left;
+}
+thead {
+background: #f1f1f1;
+text-align: left;
+color: #020202;
+}
+th {
+font-weight: 700;
+letter-spacing: -.5px;
+}
+tbody {
+
+}
+td {
+
+}
+th, td {
+border-right: 1px solid #e1e1e1; 
+border-bottom: 1px solid #e1e1e1;
+padding: .25em;
+}
+
+.star::before {
+border-bottom: 3.5em solid rgba(128, 128, 128, 0.5);
+border-left: 1.1em solid transparent;
+border-right: 1.1em solid transparent;
+left: -2.95em;
+top: -2.55em;
+content: "";
+display: block;
+height: 0;
+position: absolute;
+transform: rotate(-35deg);
+width: 0;
+}
+.star::after {
+border-bottom: 3.7em solid rgba(128, 128, 128, 0.5);
+border-left: 5.3em solid transparent;
+border-right: 5.3em solid transparent;
+color: rgba(128,128,128,.5);
+content: "";
+display: block;
+height: 0;
+left: -5.3em;
+position: absolute;
+top: 0;
+transform: rotate(-70deg);
+width: 0;
+}
+.star {
+border-bottom: 3.7em solid rgba(128, 128, 128, 0.5);
+border-left: 5.3em solid transparent;
+border-right: 5.3em solid transparent;
+color: rgba(128,128,128,.5);
+display: block;
+height: 0;
+margin: 3em 0;
+position: relative;
+transform: rotate(35deg);
+width: 0;
+transition: .5s transform ease-in-out;
+}
+.star:hover, .star:focus {
+transform: rotate(180deg);
+}
+footer .star {
+position: fixed;
+bottom: 3em;
+left: 4%;
+font-size: 60%;
+}
+
+nav, main, footer {
+padding: 1em 4%;
+clear: both;
+}
+
+nav, main {
+background: #fff;
+}
+
+nav {
+background: rgba(255, 255, 255, 0.97);
+float: left;
+font-size: 115%;
+width: 92%;
+padding: 0 4%;
+border-bottom: 1px solid #dadef2;
+border-bottom: 1px solid rgba(0,0,0,.15);
+min-height: 0;
+transition: box-shadow .5s ease-in-out;
+z-index: 10;
+}
+.js nav {
+position: fixed;
+top: 0;
+left: 0;
+transition: top .5s ease-in-out, box-shadow .5s ease-in-out, min-height .5s ease-in-out;
+}
+[data-whatinput="keyboard"] nav {
+position: static;
+box-shadow: 0 0 0 none;
+}
+.top nav {
+transition-delay: 0;
+top: 0;
+}
+.scroll-up nav {
+box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+top: 0;
+transition-delay: 0s;
+}
+.scroll-down nav {
+box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+top: -4em;
+transition: top .5s ease-in-out 1.5s;
+}
+.open.scroll-down nav, .open.top nav {
+box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 4px 5px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.08);
+top: 0;
+}
+
+.js nav ul {
+margin: 0;
+max-height: 0;
+opacity: 0;
+transition: opacity 0.5s ease-in-out 0s, max-height 0.5s ease-in-out 0s;
+visibility: hidden;
+}
+.js #menuToggle {
+float: right;
+min-height: 4.25em;
+cursor: pointer;
+padding: 2.25em 0.5em 0.5em;
+position: relative;
+}
+.js #menuToggle::before {
+content: "";
+height: .75em;
+width: 45%;
+background: transparent;
+position: absolute;
+top: .75em;
+left: 50%;
+transform: translate(-50%, 0);
+border-top: .25em solid #fff;
+border-bottom: .25em solid #fff;
+transition: all 0.5s ease 0s;
+border-radius: 25%;
+}
+.js #menuToggle::after {
+content: "";
+height: 0;
+width: 45%;
+border-bottom: .25em solid #fff;
+position: absolute;
+top: 1.25em;
+left: 50%;
+transform: translate(-50%, 0);
+transition: all 0.5s ease 0s;
+border-radius: 100%;
+}
+.js #menuToggle.active::before {
+transform: rotate(45deg) translate(-50%, 0);
+transform-origin: left center 0;
+height: .25em;
+top: 1.25em;
+left: 50%;
+border: 0 none;
+background: #fff;
+border-radius: 100%;
+}
+.js #menuToggle.active::after {
+transform: rotate(-45deg) translate(-50%, 0);
+transform-origin: left center 0;
+height: .25em;
+top: 1.25em;
+left: 50%;
+border: 0 none;
+background: #fff;
+}
+.js.open nav {
+min-height: 100vh;
+}
+.js.open nav ul {
+margin-top: 1em;
+max-height: 0;
+opacity: 1;
+visibility: visible;
+}
+
+nav ul {
+list-style-type: none;
+margin-left: 0;
+float: left;
+width: 100%;
+}
+nav li {
+margin-bottom: 1.5em;
+}
+nav li:last-child {
+margin-bottom: 0;
+}
+nav li a {
+font-family: 'Open Sans';	
+display: block;
+background-position: 0% 98%, 100% 98%, 0% 98%;
+line-height: 1.3;
+}
+
+main {
+padding: 2em 4%;
+-webkit-animation-duration: .5s;
+animation-duration: .5s;
+-webkit-animation-fill-mode: both;
+animation-fill-mode: both;
+-webkit-animation-name: fadeIn;
+animation-name: fadeIn;
+}
+main:focus {
+border: 0 none;
+outline: none;
+box-shadow: transparent none;
+}
+.night main {
+background: #333;
+color: #dadada;
+}
+.js main {
+padding-top: 5em;
+}
+@media only screen and (min-height: 650px) {
+	.js main {
+		min-height: 65vh;
+	}
+}
+[data-whatinput="keyboard"] main {
+padding-top: 1.6em;
+}
+main section {
+max-width: 40em;
+width: 100%;
+margin: 0 auto;	
+}
+
+.home {
+text-align: center;
+}
+.js .home {
+float: left;
+margin: 0;
+padding:.25em 0;
+}
+.home a {
+text-shadow:none;
+background-image:none;
+color:#4906ae;
+font-weight:600;
+font-size:120%;
+background-size:auto auto;
+-webkit-background-clip:text;
+background-image:-webkit-linear-gradient(left, #4906ae, #2245de);
+-webkit-text-fill-color:transparent;
+font-family:Andika;
+line-height:2em;
+background-position: 0 0;
+background-repeat: repeat;
+display: inline-block;
+}
+.home a:hover, .home a:focus, [data-whatinput="keyboard"] .home a:focus {
+color: #AB0DE5;
+background-image: -webkit-linear-gradient(left, #4906ae, #AB0DE5);
+}
+.logo, #ArtisticAbodeLogo {
+float: left;
+margin-right: 5px;
+width: 2em;
+height: 2em;
+}
+#ArtisticAbodeLogo .aa-logo {
+fill: #4906ae;
+transition: .5s fill ease-in-out;
+}
+a:hover #ArtisticAbodeLogo .aa-logo,
+a:focus #ArtisticAbodeLogo .aa-logo {
+fill: #6806A5;
+}
+
+
+/* animations */
+.animated {
+-webkit-animation-duration: .5s;
+animation-duration: .5s;
+-webkit-animation-fill-mode: both;
+animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity: 0;}
+100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+0% {opacity: 0;}
+100% {opacity: 1;}
+}
+
+.fadeIn {
+-webkit-animation-name: fadeIn;
+animation-name: fadeIn;
+}
+
+
+footer {
+background: #fff;
+border-top: 1px solid #dedede;
+border-top: 1px solid rgba(0,0,0,.15);
+text-align: center;
+width: 92%;
+padding: 1em 4% .25em;
+float: left;
+clear: both;
+}
+.js footer {
+bottom: -8.5em;
+transition: .5s bottom ease-in-out, .5s position ease-in-out;
+transition-delay: .25s;
+}
+@media only screen and (min-height: 350px) {
+	.js.open footer {
+	bottom: 0;
+	position: fixed;
+	z-index: 10;
+	}
+}
+footer ul {
+margin: 0;
+}
+footer li {
+display: inline-block;
+margin: 0 .5em 1em;
+}
+footer .icon {
+background: transparent none;
+}
+footer svg {
+width: 3.5em;
+height: 3.5em;
+fill: #2245de;
+fill: #767676;
+transition: fill .5s ease-in-out;
+display: inline;
+margin: 0 0 -1.5em;
+}
+footer a {
+display: inline-block;
+background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#ccc, #ccc);
+}
+footer #social a {
+min-height: 3.5em;
+}
+footer a:hover img, footer a:hover svg,
+footer a:focus img, footer a:focus svg {
+fill: #d70686;
+}
+footer a:hover #LinkedIn, footer a:focus #LinkedIn {
+fill: #0077B5;
+}
+footer a:hover #Twitter, footer a:focus #Twitter {
+fill: #1da1f2;
+}
+footer small, footer a {
+font-size: 80%;
+color: #767676;
+}
+
+/* forms */
+.button, button, input[type=submit] {
+background: #4906ae;
+background: -moz-linear-gradient(top, #4906ae 0%, #2245de 100%);
+background: -webkit-linear-gradient(top, #4906ae 0%,#2245de 100%);
+background: linear-gradient(to bottom, #4906ae 0%,#2245de 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4906ae', endColorstr='#2245de',GradientType=0 );
+color: #fff;
+font-weight: 500;
+-webkit-display: none;
+border-radius: 0;
+border: 0 none;
+-webkit-transition: all .25s ease-in-out;
+transition: all .25s ease-in-out;
+background-size: auto auto,  100% 1.2em;
+cursor: pointer;
+}
+.button:hover, button:hover, input[type=submit]:hover,
+.button:focus, button:focus, input[type=submit]:focus {
+background: #d70686;
+background: -moz-linear-gradient(top, #4906ae 0%, #d70686 100%);
+background: -webkit-linear-gradient(top, #4906ae 0%,#d70686 100%);
+background: linear-gradient(to bottom, #4906ae 0%,#d70686 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4906ae', endColorstr='#d70686',GradientType=0);
+}
+button.link {
+font-weight: inherit;
+padding: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+button.link:hover, button.link:focus {
+text-shadow: #fff 0.03em 0px, #fff -0.03em 0px, #fff 0px 0.03em, #fff 0px -0.03em, #fff 0.06em 0px, #fff -0.06em 0px, #fff 0.09em 0px, #fff -0.09em 0px, #fff 0.12em 0px, #fff -0.12em 0px, #fff 0.15em 0px, #fff -0.15em 0px;
+background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#4906ae, #4906ae);
+text-decoration: none;
+background-position: 0% 94%, 100% 94%, 0% 94%;
+background-repeat: no-repeat, no-repeat, repeat-x;
+background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+filter: none;
+}
+
+
+@media only screen and (min-width: 650px) {
+    body {
+    font-size: 110%;
+    }
+	.js #menuToggle {
+    min-height: 4.6em;
+    padding: 2.5em 0.5em 0.7em;
+	}
+	.js #menuToggle::before, .js #menuToggle::after {
+	width: 50%;
+	}
+	h1 {
+	font-size: 250%;
+	}
+	footer {
+	padding: .5em 4%;
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	}
+	footer img, footer svg {
+	width: 2em;
+	height: 2em;
+	margin: 0 0 -.7em;
+	}
+	footer #social {
+    display: block;
+    text-align: right;
+	-webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+	}
+	footer #social a {
+	min-height: 2em;
+	}
+	footer #social li {
+	border: 0 none;
+	}
+	footer ul {
+	float: right;
+	width: 50%;
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	-webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+	}
+	footer li {
+	text-align: left;
+	display: inline-block;
+	-webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+	margin: 0 0 1em;
+    padding: 0 0.5em;
+	border-right: 1px solid #ccc;
+	}
+	footer li:first-child {
+	-webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+	border: 0 none;
+	}
+}
+
+
+@media only screen and (min-width: 1000px) {
+    body {
+    font-size: 115%;
+    }
+	h1 {
+	font-size: 260%;
+	}
+	.home {
+	float: left;
+	margin: 0;
+	}
+	nav {
+	position: fixed;
+	}
+	.js.open nav {
+	height: auto;
+	min-height:0;
+	}
+	.js nav ul {
+    max-height: 100%;
+    opacity: 1;
+    visibility: visible;
+	margin: 0.5em 0;
+	}
+	.js.open nav ul {
+	margin: 0.5em 0;
+	}
+	nav ul {
+	float: right;
+	width: auto;
+	margin: 0.5em 0;
+	}
+	nav ul li {
+	float: left;
+	margin: 0 0 0 1.5em;
+	line-height: 43px;
+	}
+	nav ul li a {
+	display: inline;
+	background-position: 0% 94%, 100% 94%, 0% 94%;
+	}
+	nav button {
+	display: none;
+	visibility: hidden;
+	}
+	main {
+	padding-top: 5em;
+	}
+	footer {
+	padding: 1em 4% 0;
+	}
+	.js.open footer {
+	position: static;
+	}
+}
+
+
+@media only screen and (min-width: 1400px) {
+    body {
+    font-size: 120%;
+    }
+	h1 {
+	font-size: 270%;
+	}
+}
+
+
+@media print {
+	nav button, nav ul, footer ul#social, footer ul li:first-child, .accordion .tablist, iframe {
+		display: none !important;
+	}
+	nav {
+		position: static !important;
+		box-shadow: 0 0 0 transparent !important;
+	}
+	.home {
+		float: none !important;
+		padding-top: 0 !important;
+	}
+	.home a {
+		-webkit-text-fill-color: inherit !important;
+	}
+	main {
+		padding: 0 !important;
+		padding-top: 2em !important;
+	}	
+	a, .night main button.link {
+		text-shadow: 0 0 0 transparent !important;
+		background-image: none;
+	}
+}
+
+
+
+
+/* Accessible Tabs and Accordions */
+.accordion.js {
 	clear: both;
 	width: 100%;
 	margin-bottom: 1em;
 }
 .accordion:before,
 .accordion:after {
-  content: "";
-  display: table;
+	content: "";
+	display: table;
 } 
 .accordion:after {
-  clear: both;
+	clear: both;
 }
 .accordion > .listitem {
 	float: left;
@@ -20,11 +823,9 @@
 }
 .accordion.js > .listitem > .toggle {
 	font-size: 100%;
-}
-.accordion.multi.js > .listitem > .toggle {
 	margin: 0;
 }
-.accordion.js > .toggle button.toggle, .accordion.js .tablist .toggle {
+.accordion.js > .listitem > .toggle button.toggle, .accordion.js .tablist .toggle {
 	display: block;
 	border: 0 none;
 	text-align: left;
@@ -32,10 +833,7 @@
 .accordion.js .toggle .heading {
 	display: none;
 }
-.accordion.always.js > .listitem > .toggle {
-	margin: 0;
-}
-.accordion.always.js > .listitem > .toggle > button.toggle, .accordion.multi.js > .listitem > .toggle > button.toggle, .accordion.tabs.js > .listitem > .toggle > button.toggle {
+.accordion.js > .listitem > .toggle > button.toggle {
 	width: 100%;
 	padding: 0.5em 1.75em 0.5em 0.5em;
 	box-sizing: border-box;
@@ -49,202 +847,117 @@
 	text-align: left;
 	border: 0 none;
 }
-.accordion.multi.js > .listitem > .toggle > button.toggle {
+.accordion.js > .listitem > .toggle > button.toggle {
 	font-size: 100%;
 }
-.accordion.always.js > .listitem > .toggle > button.toggle::before, .accordion.multi.js > .listitem > .toggle > button.toggle::before, .accordion.tabs.js > .listitem > .toggle > button.toggle::before {
-	content: "";
-	position: absolute;
-	right: .5em;
-	top: 50%;
-	height: 2px;
-	width: .75em;
-	background: #222;
-	transition: background .25s ease-in-out, color .25s ease-in-out/*, transform .25s ease-in-out*/;
-}
-.accordion.always.js > .listitem > .toggle > button.toggle::after, .accordion.multi.js > .listitem > .toggle > button.toggle::after, .accordion.tabs.js > .listitem > .toggle > button.toggle::after {
-	content: "";
-	position: absolute;
-	right: .5em;
-	top: 50%;
-	height: 2px;
-	width: .75em;
-	background: #222;
-	transition: background .25s ease-in-out, color .25s ease-in-out/*, transform .25s ease-in-out*/;
-	transform: rotate(90deg);
-}
-/*
 .accordion.js > .listitem > .toggle > button.toggle[aria-expanded=false] {
 	margin-bottom: 1px;
 }
-*/
-.accordion.always.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after, .accordion.tabs.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after {
-	transform: rotate(180deg);
-}
-.accordion.always.js > .listitem > .toggle > button.toggle:hover, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover,
-.accordion.always.js > .listitem > .toggle > button.toggle:focus, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus,
-.accordion.multi.js > .listitem > .toggle > button.toggle:hover, .accordion.multi.js > .listitem > .toggle > button.toggle:focus {
+.accordion.js > .listitem > .toggle > button.toggle::before,
+.accordion.js > .listitem > .toggle > button.toggle::after {
+	content: "";
+	position: absolute;
+	right: .5em;
+	top: 50%;
+	height: 2px;
+	width: .75em;
 	background: #444;
-	color: #fff;
-}
-.accordion.always.js > .listitem > .toggle > button.toggle:hover::before, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover::before,
-.accordion.always.js > .listitem > .toggle > button.toggle:focus::before, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus::before,
-.accordion.always.js > .listitem > .toggle > button.toggle:hover::after, .accordion.tabs.js > .listitem > .toggle > button.toggle:hover::after,
-.accordion.always.js > .listitem > .toggle > button.toggle:focus::after, .accordion.tabs.js > .listitem > .toggle > button.toggle:focus::after,
-.accordion.multi.js > .listitem > .toggle > button.toggle:hover::before, .accordion.multi.js > .listitem > .toggle > button.toggle:focus::before,
-.accordion.multi.js > .listitem > .toggle > button.toggle:hover::after, .accordion.multi.js > .listitem > .toggle > button.toggle:focus::after {
-	background: #e1e1e1;
-}
-.accordion.always.js > .listitem > .content, .accordion.tabs.js > .listitem > .content {
-	clear: both;
-	width: 100%;
-	box-sizing: border-box;
-	float: left;
-	margin: 0;
-	border: 1px solid #ccc;
-}
-.accordion .content > * {
-	max-width: 100%;
-}
-
-
-/* small-only accordion */
-.accordion.small-only > .listitem > .toggle > button.toggle, .accordion.small-only.js > .listitem > .toggle > .heading {
-	display: none;
-}
-.accordion.small-only > .listitem > .toggle > .heading {
-	display: block;
-}
-.accordion.small-only.js > .listitem > .toggle, .accordion.tabs.js > .listitem > .toggle {
-	margin: 0;
-}
-.accordion.small-only.js > .listitem > .toggle > button.toggle {
-	width: 100%;
-	padding: .5em;
-	box-sizing: border-box;
-	background: #e1e1e1;
-	color: #222;
-	letter-spacing: -.5px;
-	font-size: 100%;
-	margin: 0;
-	cursor: pointer;
-	transition: background .25s ease-in-out, color .25s ease-in-out;
-	position: relative;
-	display: block;
-	border: 0 none;
-	text-align: left;
-}
-.accordion.small-only.js > .listitem > .toggle > button.toggle::before {
-	content: "";
-	position: absolute;
-	right: .5em;
-	top: 50%;
-	height: 2px;
-	width: .75em;
-	background: #222;
 	transition: background .25s ease-in-out, color .25s ease-in-out;
 }
-.accordion.small-only.js > .listitem > .toggle > button.toggle::after {
-	content: "";
-	position: absolute;
-	right: .5em;
-	top: 50%;
-	height: 2px;
-	width: .75em;
-	background: #222;
-	transition: background .25s ease-in-out, color .25s ease-in-out;
+.accordion.js > .listitem > .toggle > button.toggle::after {
 	transform: rotate(90deg);
 }
-.accordion.small-only.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after {
-	display: none;
+.accordion.js > .listitem > .toggle > button.toggle[aria-expanded=true]::after {
+	transform: rotate(180deg);
 }
-.accordion.small-only.js > .listitem > .toggle > button.toggle:hover,
-.accordion.small-only.js > .listitem > .toggle > button.toggle:focus {
+.accordion.js > .listitem > .toggle > button.toggle:hover,
+.accordion.js > .listitem > .toggle > button.toggle:focus {
 	background: #444;
 	color: #fff;
 }
-.accordion.small-only.js > .listitem > .toggle > button.toggle:hover::before,
-.accordion.small-only.js > .listitem > .toggle > button.toggle:focus::before,
-.accordion.small-only.js > .listitem > .toggle > button.toggle:hover::after,
-.accordion.small-only.js > .listitem > .toggle > button.toggle:focus::after {
-	background: #e1e1e1;
+.accordion.js > .listitem > .toggle > button.toggle:hover::before, 
+.accordion.js > .listitem > .toggle > button.toggle:focus::before, 
+.accordion.js > .listitem > .toggle > button.toggle:hover::after, 
+.accordion.js > .listitem > .toggle > button.toggle:focus::after {
+	background: #fff;
 }
-.accordion.small-only.js > .listitem > .content {
+.accordion.js > .listitem > .content {
 	clear: both;
 	width: 100%;
 	box-sizing: border-box;
 	float: left;
 	margin: 0;
 	border: 1px solid #ccc;
-}
-.accordion.small-only > .listitem > .content > .padding {
-	padding: 0;
+	border-top: 0 none;
 }
 .accordion.js > .listitem > .content > .padding {
 	padding: .5em;
 }
+.accordion > .listitem > .content * {
+	max-width: 100%;
+}
 
+/* tabs */
+.accordion.tabs.js > .tablist {
+	list-style: none;
+	margin: 0 0 -1px;
+	padding: 0;
+	z-index:1;
+	position: relative;
+}
+.accordion.tabs.js > .tablist > li {
+	display: inline;
+}
+.accordion.tabs.js > .tablist > li > button.toggle {
+	margin: 0 5px 0 0;
+	display: inline-block;
+	letter-spacing: -.5px;
+	font-size: 100%;
+	padding: .5em;
+	background: #e1e1e1;
+	color: #222;
+	border: 1px solid #ccc;
+	border-bottom: 0 none;
+	transition: background .25s ease-in-out, color .25s ease-in-out;
+	cursor: pointer;
+}
+.accordion.tabs.js > .tablist > li > button.toggle[aria-expanded=true] {
+	background: #fff;
+	border-bottom: 1px solid #fff;
+	cursor: text;
+}
+.accordion.tabs.js > .tablist > li > button.toggle[aria-expanded=true]:hover {
+	background: #fff;
+	color: #222;
+}
+.accordion.tabs.js > .tablist button.toggle:hover {
+	background: #444;
+	color: #fff;
+}
+.accordion.tabs.js > .tablist button.toggle:focus {
+	background: #fff;
+	color: #222;
+}
+.accordion.tabs.js > .listitem > .content {
+	border-top: 1px solid #ccc; 
+}
 
-
-
-/* large */
+/* large styles for small-only accordion */
 @media only screen and (min-width: 1000px) {
-	.tabs.js > .tablist {
-		list-style: none;
-		/*text-align: center;*/
-		margin: 0 0 -1px;
-		padding: 0;
-		z-index:1;
-		position: relative;
-	}
-	.tabs.js > .tablist > li {
-		display: inline;
-	}
-	.tabs.js > .tablist > li > button.toggle {
-		/*margin: 0 5px;*/
-		margin: 0 5px 0 0;
-		display: inline-block;
-		letter-spacing: -.5px;
-		font-size: 100%;
-		padding: .5em;
-		background: #e1e1e1;
-		color: #222;
-		border: 1px solid #ccc;
-		border-bottom: 0 none;
-		transition: background .25s ease-in-out, color .25s ease-in-out;
-		cursor: pointer;
-	}
-	.tabs.js > .tablist > li > button.toggle[aria-expanded=true] {
-		background: #fff;
-		border-bottom: 1px solid #fff;
-		cursor: text;
-	}
-	.tabs.js > .tablist > li > button.toggle[aria-expanded=true]:hover {
-		background: #fff;
-		color: #222;
-	}
-	.tabs.js > .tablist button.toggle:hover {
-		background: #444;
-		color: #fff;
-	}
-	.tabs.js > .tablist button.toggle:focus {
-		background: #fff;
-		color: #222;
-	}
-	.accordion.small-only > .toggle {
+	.accordion.small-only > .listitem > .toggle, .accordion.small-only > .listitem > .toggle .heading {
 		display: block;
 	}
-	.accordion.small-only > button.toggle {
+	.accordion.small-only > .listitem > .toggle > button.toggle {
 		display: none;
 	}
-	.accordion.js.small-only > .content {
+	.accordion.small-only > .content {
 		display: block;
 		overflow: hidden;
 		margin: 0;
 		padding: 0;
+		background: transparent;
 	}
 }
-
 
 /* print */
 @media print {
@@ -253,6 +966,7 @@
 		border: 0 none !important;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
+		background: transparent !important;
 	}
 	.accordion.tabs > .tablist, .accordion > .listitem > .toggle > button.toggle, .accordion.tabs > .listitem > .toggle > button.toggle {
 		display: none !important;

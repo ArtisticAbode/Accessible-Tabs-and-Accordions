@@ -1,5 +1,4 @@
 /*
-
 USAGE: Make sure to call this in the ready and resize events. If you change the JS breakpoint, be sure to change the CSS media query breakpoint as well.
 
 if ($('.accordion').length > 0) {
@@ -7,7 +6,6 @@ if ($('.accordion').length > 0) {
         breakpoint: 1000 
     });
 }
-
 */
 
 (function($) {

@@ -23,13 +23,12 @@ if ($('.accordion').length > 0) {
             $('.accordion > .toggle').each(function () {
                 accordionCount++;
                 var toggleText = $(this).text();
-                $(this).next('.content').attr({'role':'tabpanel', 'aria-expanded':'false', 'aria-hidden':'true', 'aria-labelledby':'accordion-' + accordionCount, 'id':'accordion-tab-' + accordionCount}).wrapInner('<div class="padding"></div>');
-                $(this).html('<span class="heading" aria-hidden="true">' + toggleText + '</span><button class="toggle" role="tab" aria-expanded="false" aria-controls="accordion-tab-' + accordionCount + '" id="accordion-' + accordionCount + '" type="button">' + toggleText + '</button>');
+                $(this).next('.content').attr({'aria-expanded':'false', 'aria-hidden':'true', 'aria-labelledby':'accordion-' + accordionCount, 'id':'accordion-tab-' + accordionCount}).wrapInner('<div class="padding"></div>');
+                $(this).html('<span class="heading" aria-hidden="true">' + toggleText + '</span><button class="toggle" aria-expanded="false" aria-controls="accordion-tab-' + accordionCount + '" id="accordion-' + accordionCount + '" type="button">' + toggleText + '</button>');
             });
 
             $('.accordion').each(function () {
                 $(this).addClass('js');
-                //$(this).find('button.toggle:first');
                 accordionOpen();
                 keyboardLoop(this);
             });
@@ -84,7 +83,7 @@ if ($('.accordion').length > 0) {
         function accordionMulti() { 
             $('.accordion.multi').each(function() {
 				$(this).attr('role', 'list');
-				$(this).find('> .listitem > .toggle > button.toggle').removeAttr('role', 'tab');
+				$(this).find('> .listitem > .toggle > button.toggle');
                 $(this).find('> .listitem > .content').attr('role', 'listitem').hide();
             });
             /* show/hide mouse functionality */
@@ -143,6 +142,7 @@ if ($('.accordion').length > 0) {
                     // large screen tabs
                     $('.accordion.tabs').each(function () {
 						$(this).attr({'role':'tablist'});
+						$(this).find('> .listitem').removeAttr('role');
                         // if in accordion format, convert into tabs
                         if ($(this).find('> ul.tablist').length === 0) {
                             //console.log('add tabs');
@@ -164,10 +164,9 @@ if ($('.accordion').length > 0) {
                         }
 						
 						// close all tabs except first
-						$(this).find('> .tablist > button.toggle');
-						$(this).find('> .listitem > .content').attr({'aria-expanded':'false', 'aria-hidden':'true'}).hide();
+						$(this).find('> .listitem > .content').attr({'aria-expanded':'false', 'aria-hidden':'true', 'role':'tabpanel'}).hide();
 						$(this).find('> .listitem > .content:first').attr({'aria-expanded':'true', 'aria-hidden':'false'}).show();
-						$(this).find('> .tablist > li > button.toggle').attr('aria-expanded', 'false');
+						$(this).find('> .tablist > li > button.toggle').attr({'aria-expanded':'false', 'role':'tab'});
 						$(this).find('> .tablist > li:first-child > button.toggle').attr('aria-expanded', 'true');						
 
                         $(this).find('> ul.tablist li:first button.toggle').keydown(function (e) {
@@ -238,8 +237,8 @@ if ($('.accordion').length > 0) {
                         //if ($(this).find('> ul.tablist').length) {
                             //console.log('remove tabs');		
                             $(this).attr('role', 'list');
-                            $(this).find('> .listitem > .content').attr({'aria-expanded':'false', 'aria-hidden':'true'}).hide();
-
+							$(this).find('> .listitem').attr('role', 'listitem');
+                            $(this).find('> .listitem > .content').attr({'aria-expanded':'false', 'aria-hidden':'true'}).removeAttr('role').hide();
                             $(this).find('> .listitem > .toggle > button.toggle').attr('aria-expanded', 'false');
                             $(this).find('> ul.tablist').remove();
 							$(this).find('> .listitem > .toggle').show();
